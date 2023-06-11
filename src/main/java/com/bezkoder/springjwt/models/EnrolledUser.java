@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.models;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +12,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "reviews")
-public class Review {
+@Table(name = "enrolled_users")
+public class EnrolledUser {
 
-    //DB: PK
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +30,8 @@ public class Review {
     @JoinColumn(name = "training_id")
     private Training training;
 
-    @Column(name = "rating")
-    private Integer rating;
+    @Column(name = "attended_training")
+    private String attendedTraining;
 
-    @Column(name = "comment")
-    private String comment;
 
 }

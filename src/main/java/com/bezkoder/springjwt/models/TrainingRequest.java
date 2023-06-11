@@ -11,29 +11,28 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "reviews")
-public class Review {
+@Table(name = "training_requests")
+public class TrainingRequest {
 
-    //DB: PK
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //DB: FK users
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    //DB: FK trainings
-    @ManyToOne
-    @JoinColumn(name = "training_id")
-    private Training training;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "rating")
-    private Integer rating;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "likes_counter")
+    private Integer likesCounter;
+
+    @Column(name = "admin_approval")
+    private String adminApproval;
 
 }

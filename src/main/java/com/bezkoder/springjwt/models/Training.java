@@ -1,13 +1,13 @@
 package com.bezkoder.springjwt.models;
 
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -34,13 +34,16 @@ public class Training {
     private String description;
 
     @Column(name = "occupied_slots")
-    private int occupiedSlots;
+    private Integer occupiedSlots;
 
     @Column(name = "maximum_slots")
-    private int maxiumSlots;
+    private Integer maxiumSlots;
 
     @Column(name = "type")
     private String type;
+
+    @Column(name = "starting_date")
+    private Date startingDate;
 
     @Column(name = "duration")
     private Double duration;
@@ -54,6 +57,10 @@ public class Training {
     //DB: FK reviews
     @OneToMany(mappedBy = "training")
     private Set<Review> reviews;
+
+    //DB: FK enrolled_users
+    @OneToMany(mappedBy = "training")
+    private Set<EnrolledUser> enrolledUsers;
 
 
 }

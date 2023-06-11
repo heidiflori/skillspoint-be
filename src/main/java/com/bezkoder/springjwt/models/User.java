@@ -42,6 +42,13 @@ public class User {
   @OneToMany(mappedBy = "user")
   private Set<Review> reviews;
 
+  //DB: FK reviews
+  @OneToMany(mappedBy = "user")
+  private Set<EnrolledUser> enrolledUsers;
+
+  @OneToMany(mappedBy = "user")
+  private Set<TrainingRequest> trainingRequests;
+
 
   public User() {
   }
