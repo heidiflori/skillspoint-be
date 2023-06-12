@@ -1,5 +1,7 @@
 package com.bezkoder.springjwt.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/test")
 public class TestController {
   @GetMapping("/all")
-  public String allAccess() {
-    return "Public Content.";
+  public ResponseEntity<String> allAccess() {
+    return new ResponseEntity<>("[{\"text\" : \"Public Content.\"}]", HttpStatus.OK);
   }
-
   @GetMapping("/user")
   @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
   public String userAccess() {
