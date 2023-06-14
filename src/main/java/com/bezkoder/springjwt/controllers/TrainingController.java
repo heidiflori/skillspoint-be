@@ -51,4 +51,10 @@ public class TrainingController {
     public List<Training> getApprovedTrainings(String adminApproval) {
         return trainingService.getApprovedTrainings(adminApproval);
     }
+
+    @GetMapping("/type")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('USER')")
+    public List<Training> getTrainingsByType(@RequestParam(name = "type") String type) {
+        return trainingService.getByType(type);
+    }
 }
