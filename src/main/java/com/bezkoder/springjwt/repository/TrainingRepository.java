@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface TrainingRepository extends JpaRepository<Training, Integer> {
     Training findById(int id);
+
     Training save(Training training);
 
     @Modifying
