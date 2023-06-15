@@ -37,7 +37,7 @@ public class Training {
     private Integer occupiedSlots;
 
     @Column(name = "maximum_slots")
-    private Integer maxiumSlots;
+    private Integer maximumSlots;
 
     @Column(name = "type")
     private String type;
