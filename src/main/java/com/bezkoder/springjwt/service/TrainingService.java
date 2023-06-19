@@ -12,8 +12,8 @@ public class TrainingService {
     @Autowired
     TrainingRepository trainingRepository;
 
-    public Training save(Training training) {
-        return trainingRepository.save(training);
+    public void save(Training training) {
+        trainingRepository.save(training);
     }
 
     public Training getById(int id) {
@@ -24,8 +24,8 @@ public class TrainingService {
         trainingRepository.deleteById(id);
     }
 
-    public Training updateTraining(Training training) {
-        return trainingRepository.save(training);
+    public void updateTraining(Training training) {
+        trainingRepository.save(training);
     }
 
     public void approveTraining(int id) {
