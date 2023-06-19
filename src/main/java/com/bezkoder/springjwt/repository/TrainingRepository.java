@@ -10,7 +10,7 @@ import java.util.List;
 public interface TrainingRepository extends JpaRepository<Training, Integer> {
     Training findById(int id);
 
-    Training save(Training training);
+//    void save(Training training);
 
     @Modifying
     @Query("update Training t set t.status = 'deleted' where t.id = :id")

@@ -27,7 +27,8 @@ public class Training {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "trainer")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "trainer_username")
     private String trainer;
 
     @Column(name = "description")
