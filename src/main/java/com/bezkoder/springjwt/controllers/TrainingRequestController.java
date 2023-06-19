@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/train-requests")
+@RequestMapping("/api/training-requests")
 public class TrainingRequestController {
 
     @Autowired

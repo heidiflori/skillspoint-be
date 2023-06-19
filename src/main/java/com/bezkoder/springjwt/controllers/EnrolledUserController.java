@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/enrolled-user")
+@RequestMapping("/api/enrolled-users")
 public class EnrolledUserController {
 
     @Autowired
