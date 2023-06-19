@@ -19,6 +19,7 @@ public class EnrolledUserController {
     @PostMapping("/enrol")
     @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
     public ResponseEntity<?> save(@RequestBody EnrolledUser enrolledUser){
+        enrolledUser.setAttendedTraining("No");
         enrolledUserService.save(enrolledUser);
         return ResponseEntity.ok("Enrolled");
     }
