@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/trainings")
 public class TrainingController {
@@ -51,8 +52,8 @@ public class TrainingController {
 
     @GetMapping("/approved-trainings")
     @PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('USER')")
-    public ResponseEntity<?> getApprovedTrainings(String adminApproval) {
-        return ResponseEntity.ok(trainingService.getApprovedTrainings(adminApproval));
+    public ResponseEntity<?> getApprovedTrainings() {
+        return ResponseEntity.ok(trainingService.getApprovedTrainings());
     }
 
     @GetMapping("/type")

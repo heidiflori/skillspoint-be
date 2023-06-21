@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.controllers;
 
+import com.bezkoder.springjwt.exception.ZeroResultsException;
 import com.bezkoder.springjwt.models.TrainingRequest;
 import com.bezkoder.springjwt.service.TrainingRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +47,13 @@ public class TrainingRequestController {
 
     @GetMapping("/approved-requests")
     @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
-    public ResponseEntity<?> findApprovedRequests() {
+    public ResponseEntity<?> findApprovedRequests() throws ZeroResultsException {
         return ResponseEntity.ok(trainingRequestService.getApprovedRequests());
     }
 
     @GetMapping("/pending-requests")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> findPendingRequests() {
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> findPendingRequests() throws ZeroResultsException{
         return ResponseEntity.ok(trainingRequestService.getPendingRequests());
     }
 

@@ -24,7 +24,6 @@ public interface TrainingRepository extends JpaRepository<Training, Integer> {
     @Query("select t from Training t where t.adminApproval = 'approved'")
     List<Training> findByAdminApprovalIsApproved(String adminApproval);
 
-    @Query("select t from Training t where t.adminApproval = :adminApproval")
     List<Training> findByAdminApproval(String adminApproval);
 
     List<Training> findByType(String type);

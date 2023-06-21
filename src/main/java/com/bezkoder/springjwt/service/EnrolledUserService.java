@@ -7,6 +7,8 @@ import com.bezkoder.springjwt.repository.TrainingRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EnrolledUserService {
 
@@ -26,5 +28,10 @@ public class EnrolledUserService {
         enrolledUser.setAttendedTraining("Yes");
         return enrolledUserRepository.save(enrolledUser);
     }
+
+    public List<EnrolledUser> findUsersEnrolledInTraining(Integer trainingId) {
+        return enrolledUserRepository.findUsersEnrolledInTraining(trainingId);
+    }
+
 
 }

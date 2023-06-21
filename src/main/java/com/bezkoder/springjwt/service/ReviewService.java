@@ -1,12 +1,19 @@
 package com.bezkoder.springjwt.service;
 
+import com.bezkoder.springjwt.exception.ResourceNotFoundException;
+import com.bezkoder.springjwt.exception.ReviewNotPermittedException;
+import com.bezkoder.springjwt.exception.UserAlreadyEnrolledException;
 import com.bezkoder.springjwt.models.Review;
 import com.bezkoder.springjwt.models.Training;
+import com.bezkoder.springjwt.repository.EnrolledUserRepository;
 import com.bezkoder.springjwt.repository.ReviewRepository;
 import com.bezkoder.springjwt.repository.TrainingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bezkoder.springjwt.models.EnrolledUser;
+
+import java.util.Optional;
+
 @Service
 public class ReviewService {
     @Autowired
@@ -15,13 +22,33 @@ public class ReviewService {
     @Autowired
     private TrainingRepository trainingRepository;
 
-    public void addReview(Review review) {
-        int trainingId = review.getTraining().getId();
-        Training training = trainingRepository.findById(trainingId);
-        if (training != null && training.getStatus().equals("finished") && containsEnrolledUser(training, Math.toIntExact(review.getUser().getId()))) {
+    @Autowired
+    private EnrolledUserRepository enrolledUserRepository;
+
+    public void addReview(Review review) throws ReviewNotPermittedException, ResourceNotFoundException {
+        Integer trainingId = review.getTraining().getId();
+        Long userId = review.getUser().getId();
+
+
+        Optional<Training> existingTraining = trainingRepository.findById(trainingId);
+        if(!existingTraining.isPresent()) {
+            throw new ResourceNotFoundException("Training cu id " + trainingId + " nu a fost gasit");
+        }
+
+        Training training = existingTraining.get();
+
+        Optional<EnrolledUser> existingEnrollment = enrolledUserRepository.findByUserIdAndTrainingId(userId, trainingId);
+        if(!existingEnrollment.isPresent()) {
+            throw new ResourceNotFoundException("Utilizatorul cu id " + userId + " nu a fost inscris la trainingul cu id " + trainingId);
+        }
+
+        EnrolledUser enrolledUser = existingEnrollment.get();
+
+
+        if (training.getStatus().equals("finished") && enrolledUser.getAttendedTraining().equals("Yes")) {
             reviewRepository.save(review);
         } else {
-            throw new IllegalArgumentException("Cannot add a review for the training. Please make sure the training is finished and you are enrolled.");
+            throw new ReviewNotPermittedException("Cannot add a review for the training. Please make sure the training is finished and you were present.");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.service;
 
+import com.bezkoder.springjwt.exception.ZeroResultsException;
 import com.bezkoder.springjwt.models.TrainingRequest;
 import com.bezkoder.springjwt.repository.TrainingRequestRepository;
 import org.hibernate.sql.results.internal.RowTransformerSingularReturnImpl;
@@ -35,12 +36,22 @@ public class TrainingRequestService {
         return trainingRequestRepository.save(trainingRequest);
     }
 
-    public List<TrainingRequest> getApprovedRequests(){
-        return trainingRequestRepository.findByAdminApproval("approved");
+    public List<TrainingRequest> getApprovedRequests() throws ZeroResultsException{
+        List<TrainingRequest> trainingRequestList = trainingRequestRepository.findByAdminApproval("approved");
+        if(trainingRequestList.size() == 0){
+            throw new ZeroResultsException("Zero results found");
+        }else{
+            return trainingRequestList;
+        }
     }
 
-    public List<TrainingRequest> getPendingRequests(){
-        return trainingRequestRepository.findByAdminApproval("pending");
+    public List<TrainingRequest> getPendingRequests() throws ZeroResultsException{
+        List<TrainingRequest> trainingRequestList = trainingRequestRepository.findByAdminApproval("pending");
+        if(trainingRequestList.size() == 0){
+            throw new ZeroResultsException("Zero results found");
+        }else{
+            return trainingRequestList;
+        }
     }
 
 }
