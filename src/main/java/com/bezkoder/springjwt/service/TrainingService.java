@@ -6,6 +6,7 @@ import com.bezkoder.springjwt.exception.TrainingOngoingException;
 import com.bezkoder.springjwt.exception.UserAlreadyEnrolledException;
 import com.bezkoder.springjwt.models.EnrolledUser;
 import com.bezkoder.springjwt.models.Training;
+import com.bezkoder.springjwt.models.TrainingRequest;
 import com.bezkoder.springjwt.repository.EnrolledUserRepository;
 import com.bezkoder.springjwt.repository.TrainingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,10 @@ public class TrainingService {
         trainingRepository.save(training);
     }
 
-    public void approveTraining(int id) {
-        trainingRepository.approveTraining(id);
+    public Training approveTraining(Integer id) {
+        Training training = trainingRepository.findById(id).get();
+        training.setAdminApproval("approved");
+        return trainingRepository.save(training);
     }
 
     public List<Training> getByAdminApproval(String adminApproval) {

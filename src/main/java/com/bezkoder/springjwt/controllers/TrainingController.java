@@ -30,16 +30,16 @@ public class TrainingController {
         return ResponseEntity.ok("Training updated.");
     }
 
-    @DeleteMapping("/delete")
+    @PutMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> deleteTrainingById(@RequestParam(name = "id") int id) {
+    public ResponseEntity<?> deleteTrainingById(@PathVariable Integer id) {
         trainingService.deleteById(id);
         return ResponseEntity.ok("Training deleted");
     }
 
-    @PutMapping("/approve")
+    @PutMapping("/approve/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> approveTraining(@RequestParam(name = "id") int id) {
+    public ResponseEntity<?> approveTraining(@PathVariable Integer id) {
         trainingService.approveTraining(id);
         return ResponseEntity.ok("Training approved.");
     }
