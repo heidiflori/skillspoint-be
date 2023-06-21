@@ -61,6 +61,4 @@ public class Training {
     //DB: FK enrolled_users
     @OneToMany(mappedBy = "training")
     private Set<EnrolledUser> enrolledUsers;
-
-
 }

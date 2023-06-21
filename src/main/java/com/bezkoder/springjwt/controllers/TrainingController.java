@@ -3,56 +3,62 @@ package com.bezkoder.springjwt.controllers;
 import com.bezkoder.springjwt.models.Training;
 import com.bezkoder.springjwt.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/training")
+@RequestMapping("/api/trainings")
 public class TrainingController {
     @Autowired
     TrainingService trainingService;
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
-    public Training addTraining(@RequestBody Training training) {
-        return trainingService.save(training);
+    public ResponseEntity<?> addTraining(@RequestBody Training training) {
+        training.setAdminApproval("pending");
+        training.setStatus("upcoming");
+        trainingService.save(training);
+        return ResponseEntity.ok("Training saved.");
     }
 
     @PutMapping("/edit")
     @PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
-    public void updateTraining(@RequestBody Training training) {
+    public ResponseEntity<?> updateTraining(@RequestBody Training training) {
         trainingService.updateTraining(training);
+        return ResponseEntity.ok("Training updated.");
     }
 
-    @DeleteMapping("/delete")
+    @PutMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteTrainingById(@RequestParam(name = "id") int id) {
+    public ResponseEntity<?> deleteTrainingById(@PathVariable Integer id) {
         trainingService.deleteById(id);
+        return ResponseEntity.ok("Training deleted");
     }
 
-    @PutMapping("/approve")
+    @PutMapping("/approve/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void approveTraining(@RequestParam(name = "id") int id) {
+    public ResponseEntity<?> approveTraining(@PathVariable Integer id) {
         trainingService.approveTraining(id);
+        return ResponseEntity.ok("Training approved.");
     }
 
     @GetMapping("/pending-trainings")
     @PreAuthorize("hasRole('ADMIN')")
-    public List<Training> getPendingTrainings() {
-        return trainingService.getPendingTrainings();
+    public ResponseEntity<?> getPendingTrainings() {
+        return ResponseEntity.ok(trainingService.getPendingTrainings());
     }
 
     @GetMapping("/approved-trainings")
     @PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('USER')")
-    public List<Training> getApprovedTrainings(String adminApproval) {
-        return trainingService.getApprovedTrainings(adminApproval);
+    public ResponseEntity<?> getApprovedTrainings() {
+        return ResponseEntity.ok(trainingService.getApprovedTrainings());
     }
 
     @GetMapping("/type")
     @PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('USER')")
-    public List<Training> getTrainingsByType(@RequestParam(name = "type") String type) {
-        return trainingService.getByType(type);
+    public ResponseEntity<?> getTrainingsByType(@RequestParam(name = "type") String type) {
+        return ResponseEntity.ok(trainingService.getByType(type));
     }
 }
