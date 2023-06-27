@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.controllers;
 
+import com.bezkoder.springjwt.exception.ResourceNotFoundException;
 import com.bezkoder.springjwt.models.Training;
 import com.bezkoder.springjwt.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class TrainingController {
     @Autowired
     TrainingService trainingService;
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
+    public ResponseEntity<?> getTrainingById(@PathVariable Integer id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(trainingService.findById(id));
+    }
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")

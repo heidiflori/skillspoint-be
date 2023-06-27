@@ -24,6 +24,13 @@ public class TrainingService {
     @Autowired
     EnrolledUserRepository enrolledUserRepository;
 
+    public Training findById(Integer id) throws ResourceNotFoundException{
+        if(trainingRepository.findById(id).isPresent())
+            return trainingRepository.findById(id).get();
+        else
+            throw new ResourceNotFoundException("Training cu id " + id + " nu a fost gasit");
+    }
+
     public void save(Training training) {
         trainingRepository.save(training);
     }
@@ -86,5 +93,7 @@ public class TrainingService {
             throw new MaximumCapacityException("Nu mai sunt sloturi disponibile pentru training-ul cu id " + trainingId);
         }
     }
+
+
 
 }
