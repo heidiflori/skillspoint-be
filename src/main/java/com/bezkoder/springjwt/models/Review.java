@@ -29,7 +29,6 @@ public class Review {
     //DB: FK trainings
     @ManyToOne
     @JoinColumn(name = "training_id")
-    @JsonIgnore
     private Training training;
 
     @Column(name = "rating")

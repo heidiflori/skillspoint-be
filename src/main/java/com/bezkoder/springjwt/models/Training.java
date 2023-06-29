@@ -57,6 +57,7 @@ public class Training {
 
     //DB: FK reviews
     @OneToMany(mappedBy = "training")
+    @JsonIgnore
     private Set<Review> reviews;
 
     //DB: FK enrolled_users
