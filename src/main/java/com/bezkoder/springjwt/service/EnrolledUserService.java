@@ -33,5 +33,7 @@ public class EnrolledUserService {
         return enrolledUserRepository.findUsersEnrolledInTraining(trainingId);
     }
 
-
+    public List<EnrolledUser> getTrainingsEnrolledByUserId(Integer id) {
+        return enrolledUserRepository.findTrainingsEnrolledByUserId(id);
+    }
 }

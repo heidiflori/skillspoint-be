@@ -18,4 +18,6 @@ public interface EnrolledUserRepository extends JpaRepository<EnrolledUser,Integ
 
     Optional<EnrolledUser> findByUserIdAndTrainingId(Long userId, Integer trainingId);
 
+    @Query("SELECT e FROM EnrolledUser e WHERE e.user.id = :userId")
+    List<EnrolledUser> findTrainingsEnrolledByUserId(@Param("userId") Integer userId);
 }

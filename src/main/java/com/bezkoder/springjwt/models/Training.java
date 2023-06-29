@@ -1,6 +1,7 @@
 package com.bezkoder.springjwt.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -60,5 +61,6 @@ public class Training {
 
     //DB: FK enrolled_users
     @OneToMany(mappedBy = "training")
+    @JsonIgnore
     private Set<EnrolledUser> enrolledUsers;
 }

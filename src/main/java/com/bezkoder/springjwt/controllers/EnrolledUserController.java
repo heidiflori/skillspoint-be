@@ -53,6 +53,10 @@ public class EnrolledUserController {
         return enrolledUserService.findUsersEnrolledInTraining(trainingId);
     }
 
-
+    @GetMapping("/{userId}")
+    @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
+    public List<EnrolledUser> getTrainingsForUser(@PathVariable Integer userId) {
+        return enrolledUserService.getTrainingsEnrolledByUserId(userId);
+    }
 
 }
