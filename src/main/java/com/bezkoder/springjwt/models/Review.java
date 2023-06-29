@@ -24,7 +24,6 @@ public class Review {
     //DB: FK users
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
 
     //DB: FK trainings
