@@ -28,4 +28,11 @@ public class ReviewController {
         reviewService.deleteReview(id);
         return ResponseEntity.ok("Review deleted.");
     }
+
+    @GetMapping("/{userId}")
+    @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
+    public ResponseEntity<?> findByUserid(@PathVariable Integer userId){
+        return ResponseEntity.ok(reviewService.findByUserId(userId));
+    }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bezkoder.springjwt.models.EnrolledUser;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +44,10 @@ public class ReviewService {
         } else {
             throw new IllegalArgumentException("Review not found.");
         }
+    }
+
+
+    public List<Review> findByUserId(Integer userId){
+        return reviewRepository.findByUserId(userId);
     }
 }

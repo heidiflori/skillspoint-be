@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,11 +24,13 @@ public class Review {
     //DB: FK users
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     //DB: FK trainings
     @ManyToOne
     @JoinColumn(name = "training_id")
+    @JsonIgnore
     private Training training;
 
     @Column(name = "rating")
