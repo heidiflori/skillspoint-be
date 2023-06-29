@@ -25,31 +25,8 @@ public class ReviewService {
     @Autowired
     private EnrolledUserRepository enrolledUserRepository;
 
-    public void addReview(Review review) throws ReviewNotPermittedException, ResourceNotFoundException {
-        Integer trainingId = review.getTraining().getId();
-        Long userId = review.getUser().getId();
-
-
-        Optional<Training> existingTraining = trainingRepository.findById(trainingId);
-        if(!existingTraining.isPresent()) {
-            throw new ResourceNotFoundException("Training cu id " + trainingId + " nu a fost gasit");
-        }
-
-        Training training = existingTraining.get();
-
-        Optional<EnrolledUser> existingEnrollment = enrolledUserRepository.findByUserIdAndTrainingId(userId, trainingId);
-        if(!existingEnrollment.isPresent()) {
-            throw new ResourceNotFoundException("Utilizatorul cu id " + userId + " nu a fost inscris la trainingul cu id " + trainingId);
-        }
-
-        EnrolledUser enrolledUser = existingEnrollment.get();
-
-
-        if (training.getStatus().equals("finished") && enrolledUser.getAttendedTraining().equals("Yes")) {
-            reviewRepository.save(review);
-        } else {
-            throw new ReviewNotPermittedException("Cannot add a review for the training. Please make sure the training is finished and you were present.");
-        }
+    public void addReview(Review review){
+        reviewRepository.save(review);
     }
 
     private boolean containsEnrolledUser(Training training, int userId) {

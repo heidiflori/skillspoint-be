@@ -17,7 +17,7 @@ public class ReviewController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
-    public ResponseEntity<?> addReview(@RequestBody Review review) throws ReviewNotPermittedException, ResourceNotFoundException {
+    public ResponseEntity<?> addReview(@RequestBody Review review){
         reviewService.addReview(review);
         return ResponseEntity.ok("Review added.");
     }
