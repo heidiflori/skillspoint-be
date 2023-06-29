@@ -35,10 +35,10 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.findByUserId(userId));
     }
 
-//    @GetMapping("/training-id/{trainingId}")
-//    @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
-//    public ResponseEntity<?> getReviewsByTrainingId(@PathVariable Integer id) {
-//        return ResponseEntity.ok(reviewService.getByTrainingId(id));
-//    }
+    @GetMapping("/training/{trainingId}")
+    @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
+    public ResponseEntity<?> findByTrainingid(@PathVariable Integer trainingId){
+        return ResponseEntity.ok(reviewService.findByTrainingId(trainingId));
+    }
 
 }

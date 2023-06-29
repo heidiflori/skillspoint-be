@@ -51,7 +51,7 @@ public class ReviewService {
         return reviewRepository.findByUserId(userId);
     }
 
-    public List<Review> getByTrainingId(Integer id) {
-        return reviewRepository.findByTrainingId(id);
+    public List<Review> findByTrainingId(Integer trainingId){
+        return reviewRepository.findByTrainingId(trainingId);
     }
 }
