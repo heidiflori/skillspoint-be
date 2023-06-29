@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "skillspoint",
+  "private_key_id": "65c2834282578460077d2cc7d380bf600b2e9f74",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDCWjThrfo0Neuf\nPwG0Zp+S34C8ZUQnHieeet9+mm5gAXPSU4mcWXmQu01pEYQzBwCC3NQJhdcV/WP2\nBjTkPh6gn7taYz9d5Wd4E8xNTVISPQYckhuB39+4jfxu10f8xFDK7Uj5UMmN35wX\nSFIMiBpXDS1n3bLVNILobLKWi6GPer8gJsWoA0v0dNsnAE8QfM3KCgg2vBmDVfa9\nzq1/h6Pc7i0rmSIiU9Pvt+o/uAJvQlBU5RQMIdxe2qZt+y2ubttz9Ujyi8Fd1eZt\nrExDEdb8X63GVp09HLmnsbaG3dfL1xpvjJC2VjWlK9DXKVxu/Rarl+DF6+pzF5Kq\nvLJ4+pvXAgMBAAECggEAEjegY1MKc+BmAJxITZ+c74hxqbcYR05lSk6cKmLRW8Bn\nGdzotjYQ1gcof2O774iFfL60RVw9R/tjZkk4pfhIqKewSQ2qf+Oj6jZ43PoVak48\nB2uOloLklokAk2csgT3pkMvjHjN7YQgHuor13eTYCzbZ/bVjMObmKmEd8EyQTUF7\nWK/uhmZezihJQZ4392cMcgLCDiPf86BNFmqF5fEn2+TAc4TbKq0KW1pIF8/SyqVp\nKCfo6MyKjNGtZ8MCxBtoVdSTk/1pUyauRPQBTTwHU+LhtN/Ep8HFKmUyp6+qsvOW\nfePuSe42+ITlkCV1K+zrxZBvBP7IGL/vHqPNZo+g0QKBgQDmEaAwmz7o+9cd9JCV\ntz83JdjVet2CQuIMPusFQzYJjFHhR3yKrI+hgrNHlqA/CNpDcEedu9w3dIFrGMhn\nS8gEQnewCL/v4x9hEgBnwFl1zP9utbck3vOM1RzFyjslty8V/TaOiOfcrgsS9XLw\nmAxsbaQjOhmRTad9Ne8Z64HjPwKBgQDYQgXCwHeoQIptUCE6gqnSG16pQeTr3qJ6\nJ+QvklSckC3Dm4ufcGxua1MWgkG0C2zEhjjRbIIDtR9BMMImur3+Gz2cjpLLvyP6\nxHf/oUt2poL6MFu6kKa9jC4hP+S7Y8hBD8K6IT3NVCYH5FZPHFKRjRTYswtv4LeP\nKRXwd+zZaQKBgQCPjHHRwhu3jOME2sKX15VG2IN5d8bb7tVR5LQJPY1q2bWBBXSM\npeycTouD4FSt390ndNgKb9uQck4Jv5XS9bKgDcTV/i+cAq9ihrPgCGEJIlZCAnl6\nNO3rclEYi/zppGlpo+s1dfCNfb6FHsaPnZ8qzCI8pJStV7Foa417M7mASwKBgQC8\nNNlmoLKCj4jpka8ZiNXasU805tAgJuYogccpT6SrjR8G+bwNyn3TqzvofvxHgRnr\n/xQ7zr9oEp1c0t5lbmgjWfnI4pwHDhZ2C76TjwBqBog+zQ9H0tQKapFLBpw+KZ0C\nYoEKFBwBMpbWj3Y961xAqBPYdBokB+I4iX06hmRu4QKBgQCTySwp4ExD4fo6vWU3\n5544W/ev2BpkAYWX6NdROroRzkd6XLHlzvd0EW7JaAzaioI0zsGw0w6A7i+xUTkE\nV06vPd6upDp4Eme753lwSJ69PMoR/WvO/n+UXMh972m374TsXW7UpqCPkECpK8Wa\nDgdsJ2W/E8TEcT9Dl9NtN90b1w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "spring-boot-gcs-uploader@skillspoint.iam.gserviceaccount.com",
+  "client_id": "101829853323368366014",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spring-boot-gcs-uploader%40skillspoint.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
