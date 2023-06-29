@@ -24,6 +24,7 @@ public class TrainingController {
     @PostMapping("/add")
     @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
     public ResponseEntity<?> addTraining(@RequestBody Training training) {
+        training.setOccupiedSlots(0);
         training.setAdminApproval("pending");
         training.setStatus("upcoming");
         trainingService.save(training);
