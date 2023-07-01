@@ -64,4 +64,8 @@ public class Training {
     @OneToMany(mappedBy = "training")
     @JsonIgnore
     private Set<EnrolledUser> enrolledUsers;
+
+    @OneToMany(mappedBy = "training")
+    @JsonIgnore
+    private Set<TrainingFile> trainingFiles;
 }

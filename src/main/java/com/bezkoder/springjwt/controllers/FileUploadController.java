@@ -1,6 +1,11 @@
 package com.bezkoder.springjwt.controllers;
 
+import com.bezkoder.springjwt.models.Training;
+import com.bezkoder.springjwt.models.TrainingFile;
+import com.bezkoder.springjwt.repository.TrainingRepository;
 import com.bezkoder.springjwt.service.StorageService;
+import com.bezkoder.springjwt.service.TrainingFileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,12 +17,19 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/skills")
 public class FileUploadController {
+
+    @Autowired
+    TrainingFileService trainingFileService;
+
+    @Autowired
+    TrainingRepository trainingRepository;
 
     private final StorageService storageService;
 
@@ -27,17 +39,27 @@ public class FileUploadController {
 
     @PostMapping("/upload")
     @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("trainingId") Integer trainingId) {
         if (file.isEmpty()) {
             return new ResponseEntity<>("Please select a file!", HttpStatus.BAD_REQUEST);
         }
         try {
+            String originalFileName = file.getOriginalFilename();
+            String newFileName = trainingId + "_" + originalFileName;
+
             // convert multipart file to path
-            Path path = Paths.get(file.getOriginalFilename());
+            Path path = Paths.get(newFileName);
             file.transferTo(path);
 
             // upload the file and return the public download link
             String downloadLink = storageService.uploadFile(path);
+
+            TrainingFile trainingFile = new TrainingFile();
+            trainingFile.setFileName(newFileName);
+            Training training = trainingRepository.findById(trainingId).orElseThrow(() -> new Exception("Training not found"));
+            trainingFile.setTraining(training);
+            trainingFileService.save(trainingFile);
+
             return new ResponseEntity<>(downloadLink, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,5 +81,18 @@ public class FileUploadController {
                     .body(null);
         }
     }
+
+    @GetMapping("/files/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('TRAINER') or hasRole('ADMIN')")
+    public ResponseEntity<List<TrainingFile>> getTrainingFilesStartingWith(@PathVariable("id") Integer id) {
+        try {
+            List<TrainingFile> files = trainingFileService.findTrainingFilesStartingWith(id + "_");
+            return new ResponseEntity<>(files, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
