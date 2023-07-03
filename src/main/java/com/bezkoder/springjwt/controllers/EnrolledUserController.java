@@ -59,4 +59,11 @@ public class EnrolledUserController {
         return enrolledUserService.getTrainingsEnrolledByUserId(userId);
     }
 
+    @PutMapping("/attendance/{userId}/{trainingId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> setAttendedTraining(@PathVariable Long userId, @PathVariable Integer trainingId) {
+        enrolledUserService.setAttendedTraining(userId, trainingId);
+        return ResponseEntity.ok("User attended the training");
+    }
+
 }
