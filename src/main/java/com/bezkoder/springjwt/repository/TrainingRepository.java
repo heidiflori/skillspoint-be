@@ -11,7 +11,7 @@ public interface TrainingRepository extends JpaRepository<Training, Integer> {
     Training findById(int id);
 
     @Modifying
-    @Query("update Training t set t.status = 'deleted' where t.id = :id")
+    @Query("update Training t set t.status = 'deleted', t.adminApproval = 'declined' where t.id = :id")
     void deleteById(int id);
 
     @Modifying
